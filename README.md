@@ -6,7 +6,7 @@ This Project Is To Eliminate The Hassle of Maintaining And Keeping Track of A St
 
 We Have 3 Iterations as of now .
 
-## Iteration 1
+## [Iteration 1](/ITR1)
 
 - Acuire Name, UID, Aim, Code And Output Image From User
 - One Single Layout For Each Subjet / Practical

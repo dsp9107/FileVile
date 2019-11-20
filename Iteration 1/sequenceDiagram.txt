@@ -1,0 +1,19 @@
+title FileVile
+
+actor User
+participant App
+entity Server
+database DB
+
+
+User->App:UID, Aim, Code, Output
+
+App->Server:Details, Content
+activate Server
+DB->Server:Format
+Server-->App:.pdf File
+deactivate Server
+App-->User:Document Generated
+space
+User->App:Download File
+App-->User:Download Finished

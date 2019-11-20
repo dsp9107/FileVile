@@ -1,26 +1,55 @@
-purpose ?
+# Purpose
 
-to eliminate the hassle of maintaining and keeping track of student's lab files + getting them prepped for print
+This Project Is To Eliminate The Hassle of Maintaining And Keeping Track of A Student's Lab Files, Digitally .
 
-goals ?
+# Goals
 
-Iteration 1
+We Have 3 Iterations as of now .
 
-- have one common layout
-- user has to provide data such as aim, code, output, etc.
-- a document in .pdf would be generated out of that data and can be downloaded by the student
+## Iteration 1
 
-Iteration 2
+- Acuire Name, UID, Aim, Code And Output Image From User
+- One Single Layout For Each Subjet / Practical
+- Downloadable .pdf Document Generated For User
 
-- have formats for each subject separately
-- custom header & footer ; uid, name, page no, etc.
-- python code, if feasible and error-free, would be executed and output captured ; user no need to supply output screenshot
+## Iteration 2
 
-Iteration 3
+- Store Details of Registered Users
+- Separate Formats For Multiple Subjects
+- Customizable Header And Footer For Registered Users
+- ~Outputs of Python Code Are Generated on The Server~
 
-- user can edit data online using markdown
-- files would be stored as per subject, separately
-- index can be uploaded and aims fetched out of it ; user no need to supply aim, just select from the options
+## Iteration 3
 
-scope
+- Registered Users Can Edit Data Online Using Markdown
+- Registered Users Can Link Cloud Folder To Store Files
+- Registered Users Can Upload Index or List of Aims, Beforehand
 
+# Technology Stack
+
+## Front-End
+
+- React JS `[Keep Looking]`
+
+## Back-End
+
+- Python `[Keep Looking]`
+
+## Middleware
+
+- Security
+- Database
+- Payment
+- Ads
+
+# Server
+
+## Hardware
+
+- Raspberry Pi 3B+ `[Keep Looking]`
+
+## Software
+
+- Raspbian / Ubuntu `[Keep Looking]`
+
+# Development

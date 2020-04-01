@@ -41,16 +41,16 @@ app.post("/action", (req, res) => {
         // req.file contains information of uploaded file
         // req.body contains information of text fields, if there were any
 
-        // if (req.fileValidationError) {
-        //     return res.send(req.fileValidationError);
-        // } else if (!req.file) {
-        //     return res.send("Please select an image to upload");
-        // } else if (err instanceof multer.MulterError) {
-        //     return res.send(err);
-        // } else if (err) {
-        //     return res.send(err);
-        // }
-        //req.body.output = req.file.path || '';
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        } else if (!req.file) {
+            return res.send("Please select an image to upload");
+        } else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        } else if (err) {
+            return res.send(err);
+        }
+        req.body.output = req.file.path;
         res.download(generateFile.someFunc(req, res));
         const directoriesToBeCleared = ["uploads", "generated"];
         for (const directory of directoriesToBeCleared) {

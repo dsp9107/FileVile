@@ -1,0 +1,30 @@
+{
+    "name": "filevile",
+    "version": "1.0.0",
+    "description": "This Project Is To Eliminate The Hassle of Maintaining And Keeping Track of A Student's Lab Files, Digitally .",
+    "main": "app.js",
+    "dependencies": {
+        "docx": "^5.0.2",
+        "docxtemplater": "^3.17.3",
+        "docxtemplater-image-module": "^3.1.0",
+        "docxtemplater-image-module-free": "^1.1.1",
+        "jszip": "^2.6.1",
+        "officegen": "^0.6.4",
+        "open-docxtemplater-image-module": "^1.0.3",
+        "pizzip": "^3.0.6"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dsp9107/FileVile.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dsp9107/FileVile/issues"
+    },
+    "homepage": "https://github.com/dsp9107/FileVile#readme"
+}

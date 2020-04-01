@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FileVile</title>
+    </head>
+    <body>
+        <h1>FileVile</h1>
+        <h3>Input Required Data</h3>
+        <form action="/action" enctype="multipart/form-data" method="post">
+            <label for="handle">Handle</label><br />
+            <input
+                type="text"
+                id="handle"
+                name="handle"
+                value="dsp9107"
+            /><br />
+            <br />
+            <label for="uid">UID</label><br />
+            <input type="text" id="uid" name="uid" value="17BCS3527" /><br />
+            <label for="name">Name</label><br />
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="Dhawal Singh Panwar"
+            /><br />
+            <br />
+            <label for="aim">Aim</label><br />
+            <textarea id="aim" name="aim" rows="1" cols="40">
+WAP to calculate area of a circle</textarea
+            ><br />
+            <label for="code">Code</label><br />
+            <textarea id="code" name="code" rows="5" cols="40">
+import math
+r=2.5
+area=math.pi*(r**2)
+print("Area :",area)
+                </textarea
+            ><br />
+            <label for="output">Output</label><br />
+            <input
+                type="file"
+                id="output"
+                name="output"
+                accept="image/*"
+            /><br />
+            <br />
+            <input type="submit" id="submit" name="submit" />
+        </form>
+    </body>
+</html>

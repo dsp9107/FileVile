@@ -1,45 +1,74 @@
-// FILL A WORD TEMPLATE WITH USER PROVIDED DATA
-
-//Node.js example
-var ImageModule = require("open-docxtemplater-image-module");
-var JSZip = require("jszip");
-var Docxtemplater = require("docxtemplater");
+const express = require("express");
+require("dotenv").config();
+const port = process.env.PORT;
+const morgan = require("morgan");
+const path = require("path");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const helpers = require("./helpers");
+const generateFile = require("./generate.js");
 const fs = require("fs");
-const content = fs.readFileSync("example.docx");
-//Below the options that will be passed to ImageModule instance
-var opts = {};
-opts.centered = false; //Set to true to always center images
-opts.fileType = "docx"; //Or pptx
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, "uploads/");
+    },
 
-//Pass your image loader
-opts.getImage = function(tagValue, tagName) {
-    //tagValue is 'examples/image.png'
-    //tagName is 'image'
-    return fs.readFileSync(tagValue);
-};
+    // By default, multer removes file extensions so let's add them back
+    filename: function(req, file, cb) {
+        cb(
+            null,
+            file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+        );
+    }
+});
 
-//Pass the function that return image size
-opts.getSize = function(img, tagValue, tagName) {
-    //img is the image returned by opts.getImage()
-    //tagValue is 'examples/image.png'
-    //tagName is 'image'
-    //tip: you can use node module 'image-size' here
-    return [150, 150];
-};
+const app = express();
 
-var imageModule = new ImageModule(opts);
+app.use(express.static("view"));
 
-var zip = new JSZip(content);
-var doc = new Docxtemplater()
-    .attachModule(imageModule)
-    .loadZip(zip)
-    .setData({
-        AIM: "WAP to calculate area of a circle",
-        CODE: `import math\nr=2.5\narea=math.pi*(r**2)\nprint("Area :",area)`,
-        image: "data/ScreenShot.png"
-    })
-    .render();
+app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-var buffer = doc.getZip().generate({ type: "nodebuffer" });
+// Logic
 
-fs.writeFileSync("test.docx", buffer);
+app.post("/action", (req, res) => {
+    let upload = multer({
+        storage: storage,
+        fileFilter: helpers.imageFilter
+    }).single("output");
+    upload(req, res, function(err) {
+        // req.file contains information of uploaded file
+        // req.body contains information of text fields, if there were any
+
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        } else if (!req.file) {
+            return res.send("Please select an image to upload");
+        } else if (err instanceof multer.MulterError) {
+            return res.send(err);
+        } else if (err) {
+            return res.send(err);
+        }
+        req.body.output = req.file.path;
+        res.download(generateFile.someFunc(req, res));
+        const directoriesToBeCleared = ["uploads", "generated"];
+        for (const directory of directoriesToBeCleared) {
+            fs.readdir(directory, (err, files) => {
+                if (err) throw err;
+
+                for (const file of files) {
+                    fs.unlink(path.join(directory, file), err => {
+                        if (err) throw err;
+                    });
+                }
+            });
+        }
+    });
+});
+
+// Server Configuration
+
+var server = app.listen(port, () => {
+    console.log(`Listening At ${port} ...`);
+});
